@@ -17,33 +17,49 @@
 " along with SimpleProject.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-if exists('simple_project_loaded')
+if exists('sp_loaded')
     finish
 endif
 let sp_loaded = 1
 
 let sp_project_filename = ".vimproject"
 
-function! SimpleProjectFindUp(directory)
+function! SimpleProjectFindUp()
+    let filename_modifier_string = "%:p:h"
+    let current_dir = expand(filename_modifier_string)
+    let last_dir = ""
+    let file_exists = 0
 
+    let running = 1
+    while running
+        let full_path = current_dir . "/" . g:sp_project_filename
+        let last_dir = current_dir
+        let filename_modifier_string = filename_modifier_string . ":h"
+        let current_dir = expand(filename_modifier_string)
+
+        if last_dir == current_dir
+            let running = 0
+        else
+            if filereadable(full_path)
+                return full_path
+            endif
+        endif
+    endwhile
+
+    return ""
 endfunction
 
 function! SimpleProjectLoad()
-    let full_path = system("find_up.py . " . g:sp_project_filename)
-    let full_path = substitute(full_path, "\n$", "", "")
-    let full_path = substitute(full_path, "\s\+$", "", "")
-
-    let g:project_root_path =
-        \ substitute(full_path, g:sp_project_filename, "", "")
-    let g:project_source_path = "src/"
-
+    let full_path = SimpleProjectFindUp()
     if !empty(full_path)
+        let sp_project_root_path =
+            \ substitute(full_path, g:sp_project_filename, "", "")
+
+        :execute ":cd " . sp_project_root_path
         :execute ":source" . full_path
-        :echo "Vim project loaded."
+        :echom "Vim project loaded."
     else
-        :echo "No " . g:sp_project_filename . " file."
-        let g:project_root_path = "."
-        let g:project_source_path = "."
+        :echom "No " . g:sp_project_filename . " file."
     endif
 endfunction
 

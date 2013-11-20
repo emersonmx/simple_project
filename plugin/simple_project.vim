@@ -17,21 +17,33 @@
 " along with SimpleProject.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-function! SimpleProjectLoad()
-    let g:project_filename = ".vimproject"
+if exists('simple_project_loaded')
+    finish
+endif
+let sp_loaded = 1
 
-    let full_path = system("find_up.py . " . g:project_filename)
+let sp_project_filename = ".vimproject"
+
+function! SimpleProjectNew()
+
+endfunction
+
+function! SimpleProjectLoad()
+    let g:sp_project_filename = ".vimproject"
+
+    let full_path = system("find_up.py . " . g:sp_project_filename)
     let full_path = substitute(full_path, "\n$", "", "")
     let full_path = substitute(full_path, "\s\+$", "", "")
 
-    let g:project_root_path = substitute(full_path, g:project_filename, "", "")
+    let g:project_root_path =
+        \ substitute(full_path, g:sp_project_filename, "", "")
     let g:project_source_path = "src/"
 
     if !empty(full_path)
         :execute ":source" . full_path
         :echo "Vim project loaded."
     else
-        :echo "No " . g:project_filename . " file."
+        :echo "No " . g:sp_project_filename . " file."
         let g:project_root_path = "."
         let g:project_source_path = "."
     endif

@@ -17,7 +17,7 @@
 " along with SimpleProject.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-function! SimpleProject_Load()
+function! SimpleProjectLoad()
     let g:project_filename = ".vimproject"
 
     let full_path = system("find_up.py . " . g:project_filename)
@@ -37,4 +37,4 @@ function! SimpleProject_Load()
     endif
 endfunction
 
-command! SimpleProject_Load call SimpleProject_Load()
+command! SimpleProjectLoad call SimpleProjectLoad()

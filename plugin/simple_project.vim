@@ -24,7 +24,7 @@ let sp_loaded = 1
 
 let sp_project_filename = ".vimproject"
 
-function! SimpleProjectFindUp()
+function! s:SimpleProjectFindUp()
     let filename_modifier_string = "%:p:h"
     let current_dir = expand(filename_modifier_string)
     let last_dir = ""
@@ -49,18 +49,45 @@ function! SimpleProjectFindUp()
     return ""
 endfunction
 
+function! s:SimpleProjectNew()
+    execute "edit " . g:sp_project_filename
+
+    let new_project = [
+        \"\" Variables.",
+        \"",
+        \"\" Functions.",
+        \"",
+        \"\" Miscellaneous.",
+        \""
+    \]
+
+    call append(0, new_project)
+	execute "normal GddggzR"
+endfunction
+
 function! SimpleProjectLoad()
-    let full_path = SimpleProjectFindUp()
+    let full_path = s:SimpleProjectFindUp()
     if !empty(full_path)
         let sp_project_root_path =
             \ substitute(full_path, g:sp_project_filename, "", "")
 
-        :execute ":cd " . sp_project_root_path
-        :execute ":source" . full_path
-        :echom "Vim project loaded."
+        execute ":cd " . sp_project_root_path
+        execute ":source" . full_path
+        echom "Vim project loaded."
     else
-        :echom "No " . g:sp_project_filename . " file."
+        echom "No " . g:sp_project_filename . " file."
+    endif
+endfunction
+
+function! SimpleProjectShow()
+    let full_path = s:SimpleProjectFindUp()
+
+    if !empty(full_path)
+        execute "edit " . full_path
+    else
+        call s:SimpleProjectNew()
     endif
 endfunction
 
 command! SimpleProjectLoad call SimpleProjectLoad()
+command! SimpleProjectShow call SimpleProjectShow()

@@ -29,8 +29,6 @@ function! SimpleProjectNew()
 endfunction
 
 function! SimpleProjectLoad()
-    let g:sp_project_filename = ".vimproject"
-
     let full_path = system("find_up.py . " . g:sp_project_filename)
     let full_path = substitute(full_path, "\n$", "", "")
     let full_path = substitute(full_path, "\s\+$", "", "")

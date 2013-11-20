@@ -24,7 +24,7 @@ let sp_loaded = 1
 
 let sp_project_filename = ".vimproject"
 
-function! SimpleProjectNew()
+function! SimpleProjectFindUp(directory)
 
 endfunction
 

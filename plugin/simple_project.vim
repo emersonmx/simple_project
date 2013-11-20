@@ -1,30 +1,32 @@
 "
 " Copyright (C) 2013 Emerson Max de Medeiros Silva
 "
-" This file is part of SimpleProject.
+" This file is part of simple_project.
 "
-" SimpleProject is free software: you can redistribute it and/or modify
+" simple_project is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
 " the Free Software Foundation, either version 3 of the License, or
 " (at your option) any later version.
 "
-" SimpleProject is distributed in the hope that it will be useful,
+" simple_project is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
 "
 " You should have received a copy of the GNU General Public License
-" along with SimpleProject.  If not, see <http://www.gnu.org/licenses/>.
+" along with simple_project.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-if exists('sp_loaded')
+if exists("sp_loaded")
     finish
 endif
 let sp_loaded = 1
 
+let sp_load_on_startup = 1
+
 let sp_project_filename = ".vimproject"
 
-function! s:SimpleProjectFindUp()
+function! s:FindUp()
     let filename_modifier_string = "%:p:h"
     let current_dir = expand(filename_modifier_string)
     let last_dir = ""
@@ -49,7 +51,7 @@ function! s:SimpleProjectFindUp()
     return ""
 endfunction
 
-function! s:SimpleProjectNew()
+function! s:NewProject()
     execute "edit " . g:sp_project_filename
 
     let new_project = [
@@ -66,28 +68,29 @@ function! s:SimpleProjectNew()
 endfunction
 
 function! SimpleProjectLoad()
-    let full_path = s:SimpleProjectFindUp()
+    let full_path = s:FindUp()
     if !empty(full_path)
         let sp_project_root_path =
             \ substitute(full_path, g:sp_project_filename, "", "")
 
         execute ":cd " . sp_project_root_path
         execute ":source" . full_path
-        echom "Vim project loaded."
-    else
-        echom "No " . g:sp_project_filename . " file."
     endif
 endfunction
 
 function! SimpleProjectShow()
-    let full_path = s:SimpleProjectFindUp()
+    let full_path = s:FindUp()
 
     if !empty(full_path)
         execute "edit " . full_path
     else
-        call s:SimpleProjectNew()
+        call s:NewProject()
     endif
 endfunction
 
 command! SimpleProjectLoad call SimpleProjectLoad()
 command! SimpleProjectShow call SimpleProjectShow()
+
+if !exists("sp_no_startup_load")
+    autocmd VimEnter * SimpleProjectLoad
+endif

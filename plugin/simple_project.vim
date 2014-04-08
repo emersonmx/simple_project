@@ -78,7 +78,7 @@ function! SimpleProjectLoad()
     endif
 endfunction
 
-function! SimpleProjectShow()
+function! SimpleProject()
     let full_path = s:FindUp()
 
     if !empty(full_path)
@@ -89,7 +89,8 @@ function! SimpleProjectShow()
 endfunction
 
 command! SimpleProjectLoad call SimpleProjectLoad()
-command! SimpleProjectShow call SimpleProjectShow()
+command! SimpleProject call SimpleProject()
+autocmd BufNewFile,BufRead .vimproject setf vim
 
 if !exists("sp_no_startup_load")
     autocmd VimEnter * SimpleProjectLoad

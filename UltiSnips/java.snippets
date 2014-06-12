@@ -1,0 +1,122 @@
+global !p
+def junit(snip):
+	if snip.opt("g:ultisnips_java_junit", "") == "3":
+		snip += ""
+	else:
+		snip.rv += "@Test\n\t"
+
+def nl(snip):
+	if snip.opt("g:ultisnips_java_brace_style", "") == "nl":
+		snip += ""
+	else:
+		snip.rv += " "
+def getArgs(group):
+	import re
+	word = re.compile('[a-zA-Z><.]+ \w+')
+	return [i.split(" ") for i in word.findall(group) ]
+
+def camel(word):
+	if not word: return ''
+	return word[0].upper() + word[1:]
+
+def mixedCase(word):
+	if not word: return ''
+	return word[0].lower() + word[1:]
+
+endglobal
+
+snippet cl "class" b
+public class ${1:`!p
+snip.rv = snip.basename or "untitled"`} {
+	$0
+}
+endsnippet
+
+snippet cle "class extends" b
+public class ${1:`!p
+snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
+
+	$0
+
+}
+endsnippet
+
+snippet clc "class with constructor, fields, getters and setter" b
+public class `!p
+snip.rv = snip.basename or "untitled"` {
+`!p
+args = getArgs(t[1])
+if len(args) == 0: snip.rv = ""
+for i in args:
+	snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
+if len(args) > 0:
+	snip.rv += "\n"`
+	public `!p snip.rv = snip.basename or "unknown"`($1) { `!p
+args = getArgs(t[1])
+for i in args:
+	snip.rv += "\n\t\tthis." + i[1] + " = " + i[1] + ";"
+if len(args) == 0:
+	snip.rv += "\n"`
+	}$0
+`!p
+args = getArgs(t[1])
+if len(args) == 0: snip.rv = ""
+for i in args:
+	snip.rv += "\n\tpublic " + i[0] + " get" + camel(i[1]) + "() {\
+	\n\t\treturn " + i[1] + ";\n\t}\n"
+
+	snip.rv += "\n\tpublic void set" + camel(i[1]) + "(" + i[0] + " " + i[1] + ") {\n" + "\
+	\tthis." + i[1] + " = " + i[1] + ";\n\t}\n"
+`
+}
+endsnippet
+
+snippet clc "class with constructor, with field names" b
+public class `!p
+snip.rv = snip.basename or "untitled"` {
+`!p
+args = getArgs(t[1])
+for i in args:
+	snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
+if len(args) > 0:
+	snip.rv += "\n"`
+	public `!p snip.rv = snip.basename or "unknown"`($1) { `!p
+args = getArgs(t[1])
+for i in args:
+	snip.rv += "\n\t\tthis.%s = %s;" % (i[1], i[1])
+if len(args) == 0:
+	snip.rv += "\n"`
+	}
+
+}
+endsnippet
+
+snippet clc "class and constructor" b
+public class `!p
+snip.rv = snip.basename or "untitled"` {
+
+	public `!p snip.rv = snip.basename or "untitled"`($2) {
+		$0
+	}
+
+}
+endsnippet
+
+snippet in "interface" b
+interface ${1:`!p snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }{
+
+	$0
+
+}
+endsnippet
+
+snippet /se?tge?t|ge?tse?t|gs/ "getter and setter" b
+public $2 get$1() {
+	return `!p snip.rv = mixedCase(t[1])`;
+}
+
+public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
+	this.`!p snip.rv = mixedCase(t[1])` = `!p snip.rv = mixedCase(t[1])`;
+}
+endsnippet
+

@@ -1,4 +1,4 @@
 vimx
 ====
 
-Alguns plugins feito por mim :)
+Meus plugins personalizados :)

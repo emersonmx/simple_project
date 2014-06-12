@@ -1,4 +1,4 @@
-Simple Project
-==============
+vimx
+====
 
-Plugin que permite criar um script de configuração para cada projeto.
+Alguns plugins feito por mim :)

@@ -25,6 +25,10 @@ def mixedCase(word):
 
 endglobal
 
+snippet co "constant" b
+public static final ${1:int} ${2:var} = $3;$0
+endsnippet
+
 snippet cl "class" b
 public class ${1:`!p
 snip.rv = snip.basename or "untitled"`} {
@@ -120,3 +124,14 @@ public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
 }
 endsnippet
 
+snippet mt "method throws" b
+${1:public} ${2:void} ${3:method}(${4}) ${5:throws $6 }{
+	$0
+}
+endsnippet
+
+snippet m  "method" b
+${1:public} ${2:void} ${3:method}(${4}) {
+	$0
+}
+endsnippet

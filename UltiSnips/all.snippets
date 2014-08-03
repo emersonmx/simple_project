@@ -1,31 +1,29 @@
 # Licenses {{{ #
 snippet c) "Copyright" b
-Copyright (C) `strftime("%Y")`${1:Emerson Max de Medeiros Silva}
+Copyright (C) `!v strftime("%Y")` ${1:Emerson Max de Medeiros Silva}
 endsnippet
 
 snippet GPL3 "GPL3 License" b
-${3}
-  ${2:copyright}
+Copyright (C) ${3:`!v strftime("%Y")`} ${2:Emerson Max de Medeiros Silva}
 
-  This file is part of ${1:project}.
+This file is part of ${1:project}.
 
-  $1 is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
+$1 is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-  $1 is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+$1 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with $1.  If not, see <http://www.gnu.org/licenses/>.
-${4}
+You should have received a copy of the GNU General Public License
+along with $1.  If not, see <http://www.gnu.org/licenses/>.
 endsnippet
 
 snippet MIT "MIT License" b
-${1:copyright}
+Copyright (C) ${2:`!v strftime("%Y")`} ${1:Emerson Max de Medeiros Silva}
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the "Software"),

@@ -1,15 +1,7 @@
-global !p
-def junit(snip):
-	if snip.opt("g:ultisnips_java_junit", "") == "3":
-		snip += ""
-	else:
-		snip.rv += "@Test\n\t"
+clearsnippets in
 
-def nl(snip):
-	if snip.opt("g:ultisnips_java_brace_style", "") == "nl":
-		snip += ""
-	else:
-		snip.rv += " "
+global !p
+
 def getArgs(group):
 	import re
 	word = re.compile('[a-zA-Z><.]+ \w+')
@@ -22,23 +14,38 @@ def camel(word):
 def mixedCase(word):
 	if not word: return ''
 	return word[0].lower() + word[1:]
-
 endglobal
 
-snippet co "constant" b
-public static final ${1:int} ${2:var} = $3;$0
+snippet // "Comment" b
+// ${VISUAL}$0
+endsnippet
+
+snippet /* "Comment (multi line)" b
+/*
+  ${VISUAL}$0
+*/
+endsnippet
+
+snippet pa "package" b
+package $0
+endsnippet
+
+snippet im "import" b
+import $1;
 endsnippet
 
 snippet cl "class" b
-public class ${1:`!p
+${1:public} class ${2:`!p
 snip.rv = snip.basename or "untitled"`} {
+
 	$0
+
 }
 endsnippet
 
 snippet cle "class extends" b
-public class ${1:`!p
-snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
+${1:public} class ${2:`!p
+snip.rv = snip.basename or "untitled"`} ${3:extends ${4:Parent} }${5:implements ${6:Interface} }{
 
 	$0
 
@@ -46,7 +53,7 @@ snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements 
 endsnippet
 
 snippet clc "class with constructor, fields, getters and setter" b
-public class `!p
+${1:public} class `!p
 snip.rv = snip.basename or "untitled"` {
 `!p
 args = getArgs(t[1])
@@ -55,7 +62,7 @@ for i in args:
 	snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
 if len(args) > 0:
 	snip.rv += "\n"`
-	public `!p snip.rv = snip.basename or "unknown"`($1) { `!p
+	public `!p snip.rv = snip.basename or "unknown"`($2) { `!p
 args = getArgs(t[1])
 for i in args:
 	snip.rv += "\n\t\tthis." + i[1] + " = " + i[1] + ";"
@@ -76,7 +83,7 @@ for i in args:
 endsnippet
 
 snippet clc "class with constructor, with field names" b
-public class `!p
+${1:public} class `!p
 snip.rv = snip.basename or "untitled"` {
 `!p
 args = getArgs(t[1])
@@ -84,7 +91,7 @@ for i in args:
 	snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
 if len(args) > 0:
 	snip.rv += "\n"`
-	public `!p snip.rv = snip.basename or "unknown"`($1) { `!p
+	public `!p snip.rv = snip.basename or "unknown"`($2) { `!p
 args = getArgs(t[1])
 for i in args:
 	snip.rv += "\n\t\tthis.%s = %s;" % (i[1], i[1])
@@ -96,7 +103,7 @@ if len(args) == 0:
 endsnippet
 
 snippet clc "class and constructor" b
-public class `!p
+${1:public} class `!p
 snip.rv = snip.basename or "untitled"` {
 
 	public `!p snip.rv = snip.basename or "untitled"`($2) {
@@ -106,11 +113,69 @@ snip.rv = snip.basename or "untitled"` {
 }
 endsnippet
 
-snippet in "interface" b
-interface ${1:`!p snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }{
+snippet inn "interface" b
+${1:public} interface ${2:`!p snip.rv = snip.basename or "untitled"`} {
 
 	$0
 
+}
+endsnippet
+
+snippet ine "interface" b
+${1:public} interface ${2:`!p snip.rv = snip.basename or "untitled"`} extends ${3:Parent} {
+
+	$0
+
+}
+endsnippet
+
+snippet ini "interface" b
+${1:public} interface ${2:`!p snip.rv = snip.basename or "untitled"`} implements ${3:Parent} {
+
+	$0
+
+}
+endsnippet
+
+snippet co "constant" b
+${1:public} static final ${2:int} ${3:var} = $4;
+endsnippet
+
+snippet cos "constant string" b
+${1:public} static final String ${2:var} = "$3";
+endsnippet
+
+snippet f "field" b
+${1:private} ${2:String} ${3:`!p snip.rv = t[2].lower()`};
+endsnippet
+
+snippet cc "constructor call or setter body"
+this.${1:var} = $1;
+endsnippet
+
+snippet o "Object" b
+${1:Object} ${2:var} = ${3:new $1(${4})};
+endsnippet
+
+snippet cn "Constructor" b
+${1:public} `!p snip.rv = snip.basename or "untitled"`(${2:}) {
+	$0
+}
+endsnippet
+
+snippet cn "constructor, \w fields + assigments" b
+	`!p
+args = getArgs(t[1])
+for i in args:
+	snip.rv += "\n\tprivate " + i[0] + " " + i[1]+ ";"
+if len(args) > 0:
+	snip.rv += "\n"`
+${1:public} `!p snip.rv = snip.basename or "unknown"`($2) { `!p
+args = getArgs(t[1])
+for i in args:
+	snip.rv += "\n\t\tthis.%s = %s;" % (i[1], i[1])
+if len(args) == 0:
+	snip.rv += "\n"`
 }
 endsnippet
 
@@ -124,14 +189,168 @@ public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
 }
 endsnippet
 
-snippet mt "method throws" b
-${1:public} ${2:void} ${3:method}(${4}) ${5:throws $6 }{
+snippet /get(ter)?/ "getter" br
+public ${1:String} get${2:Name}() {
+	return `!p snip.rv = mixedCase(t[2])`;
+}
+endsnippet
+
+snippet /set(ter)?/ "setter" br
+public void set${1:Name}(${2:String} `!p snip.rv = mixedCase(t[1])`) {
+	this.`!p snip.rv = mixedCase(t[1])` = `!p snip.rv = mixedCase(t[1])`;
+}
+endsnippet
+
+snippet m "method" b
+${1:public} ${2:void} ${3:method}(${4}) {
 	$0
 }
 endsnippet
 
-snippet m  "method" b
-${1:public} ${2:void} ${3:method}(${4}) {
+snippet mp "method prototype" b
+${1:public} ${2:void} ${3:method}(${4});
+endsnippet
+
+snippet mt "method throws" b
+${1:public} ${2:void} ${3:method}(${4}) ${5:throws $6} {
 	$0
 }
+endsnippet
+
+snippet main "method (main)" b
+public static void main(String[] args) {
+	$0
+}
+endsnippet
+
+snippet if "if" b
+if (${1:condition}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet elif "else if"
+else if ($1) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet el "else" w
+else {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet sw "switch" b
+switch ($1) {
+	case $2: $0
+}
+endsnippet
+
+snippet cs "case" b
+case $1:
+	$2
+$0
+endsnippet
+
+snippet br "break"
+break;
+
+endsnippet
+
+snippet de "default" b
+default:
+	$0
+endsnippet
+
+snippet for "for loop (for)"
+for (int ${2:i} = 0; $2 < ${1:count}; ${3:$2++}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fore "for (each)" b
+for (${1:Object} ${2:o} : ${3:objs}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet wh "while" b
+while ($1) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet try "try/catch" b
+try {
+	${VISUAL}$1
+} catch(${2:Exception} ${3:e}){
+	${4:e.printStackTrace();}
+}
+endsnippet
+
+snippet ca "catch" b
+catch (${1:Exception} ${2:e})`!p nl(snip)`{
+	$0
+}
+endsnippet
+
+snippet ab "abstract" b
+abstract $0
+endsnippet
+
+snippet pr "private" b
+private $0
+endsnippet
+
+snippet po "protected" b
+protected $0
+endsnippet
+
+snippet pu "public" b
+public $0
+endsnippet
+
+snippet re "return" b
+return $1;
+endsnippet
+
+snippet st "static"
+static $0
+endsnippet
+
+snippet fi "final" b
+final $0
+endsnippet
+
+snippet sy "synchronized"
+synchronized $0
+endsnippet
+
+snippet th "throw" b
+throw new $1;
+endsnippet
+
+snippet p "print" b
+System.out.print(${VISUAL}$1);
+endsnippet
+
+snippet pl "println"  b
+System.out.println(${VISUAL}$1);
+endsnippet
+
+snippet as "assert" b
+assert ${1:test}${2/(.+)/(?1: \: ")/}${2:Failure message}${2/(.+)/(?1:")/};
+endsnippet
+
+snippet at "assert true" b
+assertTrue(${1:actual});
+endsnippet
+
+snippet af "assert false" b
+assertFalse(${1:actual});
+endsnippet
+
+snippet ae "assert equals" b
+assertEquals(${1:expected}, ${2:actual});
 endsnippet

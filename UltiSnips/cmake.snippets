@@ -1,0 +1,66 @@
+snippet cmake "cmake project" b
+cmake_minimum_required(VERSION 2.6)
+project(${2:ProjectName})
+
+find_package(${3:LIBRARY})
+
+include_directories(
+	${"$3_INCLUDE_DIR"}
+)
+
+add_subdirectory(${1:src})
+
+add_executable($2)
+
+target_link_libraries($2
+	${$3_LIBRARIES}
+)
+endsnippet
+
+snippet find "Find package" b
+find_package(${1:LIBRARY})
+endsnippet
+
+snippet glob "Add file glob" b
+file(GLOB ${1:SRCS} *.${1:cpp})
+endsnippet
+
+snippet incdir "Include subdirectory" b
+include_directories("${1:DIRECTORY}")
+endsnippet
+
+snippet subdir "Add subdirectory" b
+add_subdirectory(${1:src})
+endsnippet
+
+snippet lib "Add library" b
+add_library(${1:lib} ${2:STATIC}
+	${${1:SRCS}}
+)
+endsnippet
+
+snippet link "Add libraries to target" b
+target_link_libraries(${1:bin}
+	${1:somelib}
+)
+endsnippet
+
+snippet bin "Add executable" b
+add_executable(${1:bin})
+endsnippet
+
+snippet set "Set variable" b
+set(${1:var} ${1:val})
+endsnippet
+
+snippet dep "Add dependencies" b
+add_dependencies(${1:target}
+	${1:dep}
+)
+endsnippet
+
+snippet props "Add properties" b
+set_target_properties(${2:target}
+	${3:PROPERTIES} ${3:COMPILE_FLAGS}
+	${1:"-O3 -Wall -pedantic"}
+)

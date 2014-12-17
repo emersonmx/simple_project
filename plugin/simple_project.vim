@@ -17,14 +17,12 @@
 " along with simple_project.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-if exists("sp_loaded")
+if exists("g:sp_loaded") && g:sp_loaded
     finish
 endif
-let sp_loaded = 1
+let g:sp_loaded = 1
 
-let sp_load_on_startup = 1
-
-let sp_project_filename = ".vimproject"
+let g:sp_project_filename = ".vimproject"
 
 function! s:FindUp()
     let filename_modifier_string = "%:p:h"
@@ -88,10 +86,12 @@ function! SimpleProject()
     endif
 endfunction
 
+augroup simple_project
+    autocmd!
+    autocmd BufNewFile,BufRead .vimproject setf vim
+
+    autocmd VimEnter * nested call SimpleProjectLoad()
+augroup END
+
 command! SimpleProjectLoad call SimpleProjectLoad()
 command! SimpleProject call SimpleProject()
-autocmd BufNewFile,BufRead .vimproject setf vim
-
-if !exists("sp_no_startup_load")
-    autocmd VimEnter * SimpleProjectLoad
-endif

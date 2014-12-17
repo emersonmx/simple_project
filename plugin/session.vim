@@ -36,12 +36,6 @@ function! DeleteSession()
     endif
 endfunction
 
-augroup session_group
-    autocmd!
-
-    autocmd VimEnter * nested call LoadSession()
-augroup END
-
 command! MakeSession call MakeSession()
 command! LoadSession call LoadSession()
 command! DeleteSession call DeleteSession()

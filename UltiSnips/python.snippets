@@ -198,7 +198,7 @@ endsnippet
 ###########
 
 snippet testcase "pyunit testcase" b
-class Test${1:Class}(${2:unittest.TestCase}):
+class ${1:Class}TestCase(${2:unittest.TestCase}):
 
 	def setUp(self):
 		${4:pass}
@@ -233,6 +233,11 @@ endsnippet
 
 snippet ret "return" b
 return $0
+endsnippet
+
+clearsnippets _
+snippet __ "Magic" b
+__${1:init}__
 endsnippet
 
 # vim:ft=snippets:

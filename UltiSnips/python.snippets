@@ -193,24 +193,6 @@ def $1(self, ${3:$1}):
 endsnippet
 
 
-###########
-#  Tests  #
-###########
-
-snippet testcase "pyunit testcase" b
-class ${1:Class}TestCase(${2:unittest.TestCase}):
-
-	def setUp(self):
-		${4:pass}
-
-	def tearDown(self):
-		${5:pass}
-
-	def test_${6:name}(self):
-		${7:pass}
-endsnippet
-
-
 #############
 #  Commons  #
 #############
@@ -236,8 +218,8 @@ return $0
 endsnippet
 
 clearsnippets _
-snippet __ "Magic" b
-__${1:init}__
+snippet __ "Magic" i
+__${0:init}__
 endsnippet
 
 # vim:ft=snippets:

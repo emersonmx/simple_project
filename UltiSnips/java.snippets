@@ -5,7 +5,7 @@ global !p
 def getArgs(group):
 	import re
 	word = re.compile('[a-zA-Z><.]+ \w+')
-	return [i.split(" ") for i in word.findall(group) ]
+	return [i.split(" ") for i in word.findall(group)]
 
 def camel(word):
 	if not word: return ''

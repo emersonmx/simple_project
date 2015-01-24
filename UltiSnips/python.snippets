@@ -73,7 +73,7 @@ def write_init_body(args, parents, snip):
 	parents = [p for p in parents if p != 'object' and p != ""]
 
 	if len(parents) == 1:
-		snip += "super().__init__()"
+		snip += "super(" + p + ", self).__init__()"
 	elif len(parents) > 1:
 		for p in parents:
 			snip += "super(" + p + ", self).__init__()"
@@ -198,7 +198,7 @@ endsnippet
 #############
 
 snippet pr "Print" b
-print($0)
+print $0
 endsnippet
 
 snippet " "triple quoted string (double quotes)" b
@@ -218,8 +218,5 @@ return $0
 endsnippet
 
 clearsnippets _
-snippet __ "Magic" i
-__${0:init}__
-endsnippet
 
 # vim:ft=snippets:

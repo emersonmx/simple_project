@@ -1,0 +1,115 @@
+global !p
+from snippet_helper import *
+endglobal
+
+snippet clc "Class with constructor, fields, getters and setter" b
+class `!p
+snip.rv = snip.basename or "untitled"` {
+`!p
+args = get_args(t[1])
+snip >> 1
+if len(args) == 0:
+	snip.rv = ""
+for i in args:
+	snip += "private {};".format(i)
+if len(args) > 0:
+	snip += ""`
+	public function __construct($1) { `!p
+args = get_args(t[1])
+snip >> 2
+for i in args:
+	snip += "$this->{} = {};".format(i[1:], i)
+snip << 1
+snip += "}"`$0
+`!p
+args = get_args(t[1])
+if len(args) == 0:
+	snip.rv = ""
+snip >> 1
+for i in args:
+	snip += "public function get{}() {{".format(i[1:].title())
+	snip >> 1
+	snip += "return $this->{};".format(i[1:])
+	snip << 1
+	snip += "}\n"
+
+	snip += "public function set{}({}) {{".format(i[1:].title(), i)
+	snip >> 1
+	snip += "$this->{} = {};".format(i[1:], i)
+	snip << 1
+	snip += "}\n"
+snip << 1
+snip += "}"`
+endsnippet
+
+snippet clc "Class with constructor, with field names" b
+class `!p
+snip.rv = snip.basename or "untitled"` {
+`!p
+args = get_args(t[1])
+snip >> 1
+if len(args) == 0:
+	snip.rv = ""
+for i in args:
+	snip += "private {};".format(i)
+if len(args) > 0:
+	snip += ""`
+	public function __construct($1) { `!p
+args = get_args(t[1])
+snip >> 2
+for i in args:
+	snip += "$this->{} = {};".format(i[1:], i)
+snip << 1
+snip += "}\n"
+snip << 1
+snip += "}"`$0
+endsnippet
+
+snippet clc "Class and constructor" b
+class `!p
+snip.rv = snip.basename or "untitled"` {
+
+	public function __construct($1) {
+		$0
+	}
+
+}
+endsnippet
+
+snippet cle "Class extends" b
+class ${1:`!p
+snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
+
+	$0
+
+}
+endsnippet
+
+snippet ine "Interface extends" b
+interface ${1:`!p snip.rv = snip.basename or "untitled"`} extends ${2:Parent} {
+
+	$0
+
+}
+endsnippet
+
+snippet ini "Interface implements" b
+interface ${1:`!p snip.rv = snip.basename or "untitled"`} implements ${2:Parent} {
+
+	$0
+
+}
+endsnippet
+
+snippet cn "Constructor, \w fields + assigments" b
+`!p
+args = get_args(t[1])
+snip >> 1`
+public function __construct($1) { `!p
+args = get_args(t[1])
+snip >> 1
+for i in args:
+	snip += "$this->{} = {};".format(i[1:], i)
+snip << 1
+snip += "}"`$0
+endsnippet

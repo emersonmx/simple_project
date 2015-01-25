@@ -1,0 +1,91 @@
+snippet ns "Namespace" b
+namespace $0;
+endsnippet
+
+snippet use "Use" b
+use $0;
+endsnippet
+
+snippet . "$this" w
+$this->
+endsnippet
+
+snippet new "New object" b
+$${1:obj} = new ${2:Object}(${3:params});
+endsnippet
+
+snippet class "Default class" b
+class ${1:`!p snip.rv = snip.basename or "Untitled"`} {
+
+	$0
+
+}
+endsnippet
+
+snippet interface "Interface" b
+interface ${1:`!p snip.rv = snip.basename or "untitled"`} {
+
+	$0
+
+}
+endsnippet
+
+snippet st "Static"
+static $0
+endsnippet
+
+snippet pu "Public" b
+public $0
+endsnippet
+
+snippet po "Protected" b
+protected $0
+endsnippet
+
+snippet pi "Private" b
+private $0
+endsnippet
+
+snippet f "Field" b
+${1:private} $${2:field};
+endsnippet
+
+snippet m "Method" b
+${1:public} function ${2:name}(${3:$param}) {
+	$0
+}$0
+endsnippet
+
+snippet cc "Constructor call or setter body" b
+$this->${1:var} = $$1;
+endsnippet
+
+snippet cn "Constructor" b
+${1:public} function __construct(${2:}) {
+	$0
+}
+endsnippet
+
+snippet getter "Getter" b
+public function get${2:Name}() {
+	return $this->`!p snip.rv = t[2].title()`;
+}
+endsnippet
+
+snippet setter "Setter" b
+public function set${1:Name}($`!p snip.rv = t[1].title()`) {
+	$this->`!p snip.rv = t[1].title()` = $`!p snip.rv = t[1].title()`;${2:
+	return $this;}
+}
+endsnippet
+
+snippet gs "Getter and setter" b
+public function get$1() {
+	return $this->`!p snip.rv = t[1].title()`;
+}
+
+public function set${1:Name}($`!p snip.rv = t[1].title()`) {
+	$this->`!p snip.rv = t[1].title()` = $`!p snip.rv = t[1].title()`;${2:
+	return $this;}
+}
+endsnippet

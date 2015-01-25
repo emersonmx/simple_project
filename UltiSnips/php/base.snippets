@@ -1,0 +1,67 @@
+snippet doc "Comments" b
+/**
+ * $0
+ */
+endsnippet
+
+snippet if "If block" b
+if (${1:/* condition */}) {
+	${2:/* code */}
+}
+endsnippet
+
+snippet ife "If else block" b
+if (${1:/* condition */}) {
+	${2:/* code */}
+} else {
+	${3:/* code */}
+}
+endsnippet
+
+snippet el "Else block" b
+else {
+	${1:/* code */}
+}
+endsnippet
+
+snippet elif "Else if block" b
+elseif (${1:/* condition */}) {
+	${2:/* code */}
+}
+endsnippet
+
+snippet for "For loop" b
+for (${1:$i = 0}; ${2:$i < 10}; ${3:$i++}) {
+	${4:/* code */}
+}
+endsnippet
+
+snippet fore "Foreach loop" b
+foreach ($${1:variable} as $${3:value}) {
+	${4:/* code... */}
+}$0
+endsnippet
+
+snippet forek "Foreach key loop" b
+foreach ($${1:variable} as $${2:key} => $${3:value}) {
+	${4:/* code... */}
+}
+endsnippet
+
+snippet wh "While loop" b
+while (${1:/* condition */}) {
+	${2:/* code */}
+}
+endsnippet
+
+snippet do "Do while loop" b
+do {
+	${2:/* code */}
+while (${1:/* condition */});
+endsnippet
+
+snippet fun "Function" b
+function ${1:name}(${2:params}) {
+	${3:/* code */}
+}
+endsnippet

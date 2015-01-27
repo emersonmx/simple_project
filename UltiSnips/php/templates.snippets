@@ -6,7 +6,7 @@ snippet clc "Class with constructor, fields, getters and setter" b
 class `!p
 snip.rv = snip.basename or "untitled"` {
 `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 snip >> 1
 if len(args) == 0:
 	snip.rv = ""
@@ -15,14 +15,14 @@ for i in args:
 if len(args) > 0:
 	snip += ""`
 	public function __construct($1) { `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 snip >> 2
 for i in args:
 	snip += "$this->{} = {};".format(i[1:], i)
 snip << 1
 snip += "}"`$0
 `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 if len(args) == 0:
 	snip.rv = ""
 snip >> 1
@@ -46,7 +46,7 @@ snippet clc "Class with constructor, with field names" b
 class `!p
 snip.rv = snip.basename or "untitled"` {
 `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 snip >> 1
 if len(args) == 0:
 	snip.rv = ""
@@ -55,7 +55,7 @@ for i in args:
 if len(args) > 0:
 	snip += ""`
 	public function __construct($1) { `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 snip >> 2
 for i in args:
 	snip += "$this->{} = {};".format(i[1:], i)
@@ -103,10 +103,10 @@ endsnippet
 
 snippet cn "Constructor, \w fields + assigments" b
 `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 snip >> 1`
 public function __construct($1) { `!p
-args = get_args(t[1])
+args = get_args_php(t[1])
 snip >> 1
 for i in args:
 	snip += "$this->{} = {};".format(i[1:], i)

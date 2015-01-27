@@ -1,3 +1,7 @@
+global !p
+from snippet_helper.common import get_class_name
+endglobal
+
 snippet ns "Namespace" b
 namespace $0;
 endsnippet
@@ -15,7 +19,7 @@ $${1:obj} = new ${2:Object}(${3:params});
 endsnippet
 
 snippet class "Default class" b
-class ${1:`!p snip.rv = snip.basename or "Untitled"`} {
+class ${1:`!p snip.rv = get_class_name(snip)`} {
 
 	$0
 
@@ -23,7 +27,7 @@ class ${1:`!p snip.rv = snip.basename or "Untitled"`} {
 endsnippet
 
 snippet interface "Interface" b
-interface ${1:`!p snip.rv = snip.basename or "untitled"`} {
+interface ${1:`!p snip.rv = get_class_name(snip)`} {
 
 	$0
 
@@ -60,32 +64,30 @@ snippet cc "Constructor call or setter body" b
 $this->${1:var} = $$1;
 endsnippet
 
-snippet cn "Constructor" b
-${1:public} function __construct(${2:}) {
-	$0
-}
-endsnippet
-
 snippet getter "Getter" b
 public function get${2:Name}() {
-	return $this->`!p snip.rv = t[2].title()`;
+	return $this->`!p snip.rv = prepare_field(t[2])`;
 }
 endsnippet
 
 snippet setter "Setter" b
-public function set${1:Name}($`!p snip.rv = t[1].title()`) {
-	$this->`!p snip.rv = t[1].title()` = $`!p snip.rv = t[1].title()`;${2:
+public function set${1:Name}($`!p snip.rv = prepare_field(t[1])`) {
+	$this->`!p
+snip.rv = prepare_field(t[1])` = $`!p
+snip.rv = prepare_field(t[1])`;${2:
 	return $this;}
 }
 endsnippet
 
 snippet gs "Getter and setter" b
 public function get$1() {
-	return $this->`!p snip.rv = t[1].title()`;
+	return $this->`!p snip.rv = prepare_field(t[1])`;
 }
 
-public function set${1:Name}($`!p snip.rv = t[1].title()`) {
-	$this->`!p snip.rv = t[1].title()` = $`!p snip.rv = t[1].title()`;${2:
+public function set${1:Name}($`!p snip.rv = prepare_field(t[1])`) {
+	$this->`!p
+snip.rv = prepare_field(t[1])` = $`!p
+snip.rv = prepare_field(t[1])`;${2:
 	return $this;}
 }
 endsnippet

@@ -1,73 +1,50 @@
 global !p
-from snippet_helper import *
+from snippet_helper.common import get_class_name
+from snippet_helper.php import *
 endglobal
 
 snippet clc "Class with constructor, fields, getters and setter" b
-class `!p
-snip.rv = snip.basename or "untitled"` {
+class `!p snip.rv = get_class_name(snip)` {
 `!p
-args = get_args_php(t[1])
-snip >> 1
+args = get_args(t[1])
 if len(args) == 0:
 	snip.rv = ""
-for i in args:
-	snip += "private {};".format(i)
+write_fields(args, snip)
 if len(args) > 0:
 	snip += ""`
 	public function __construct($1) { `!p
-args = get_args_php(t[1])
-snip >> 2
-for i in args:
-	snip += "$this->{} = {};".format(i[1:], i)
-snip << 1
+args = get_args(t[1])
+write_construct_body(args, snip)
 snip += "}"`$0
 `!p
-args = get_args_php(t[1])
+args = get_args(t[1])
 if len(args) == 0:
 	snip.rv = ""
-snip >> 1
-for i in args:
-	snip += "public function get{}() {{".format(i[1:].title())
-	snip >> 1
-	snip += "return $this->{};".format(i[1:])
-	snip << 1
-	snip += "}\n"
-
-	snip += "public function set{}({}) {{".format(i[1:].title(), i)
-	snip >> 1
-	snip += "$this->{} = {};".format(i[1:], i)
-	snip << 1
-	snip += "}\n"
-snip << 1
+write_getter_setter(args, snip)
 snip += "}"`
 endsnippet
 
 snippet clc "Class with constructor, with field names" b
 class `!p
-snip.rv = snip.basename or "untitled"` {
+snip.rv = get_class_name(snip)` {
 `!p
-args = get_args_php(t[1])
-snip >> 1
+args = get_args(t[1])
 if len(args) == 0:
 	snip.rv = ""
-for i in args:
-	snip += "private {};".format(i)
+write_fields(args, snip)
 if len(args) > 0:
 	snip += ""`
 	public function __construct($1) { `!p
-args = get_args_php(t[1])
-snip >> 2
-for i in args:
-	snip += "$this->{} = {};".format(i[1:], i)
+args = get_args(t[1])
+write_construct_body(args, snip)
+snip += "}"`$0`!p
 snip << 1
-snip += "}\n"
-snip << 1
-snip += "}"`$0
+snip += "\n}"`
 endsnippet
 
 snippet clc "Class and constructor" b
 class `!p
-snip.rv = snip.basename or "untitled"` {
+snip.rv = get_class_name(snip)` {
 
 	public function __construct($1) {
 		$0
@@ -78,7 +55,7 @@ endsnippet
 
 snippet cle "Class extends" b
 class ${1:`!p
-snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
+snip.rv = get_class_name(snip)`} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
 
 	$0
 
@@ -86,7 +63,7 @@ snip.rv = snip.basename or "untitled"`} ${2:extends ${3:Parent} }${4:implements 
 endsnippet
 
 snippet ine "Interface extends" b
-interface ${1:`!p snip.rv = snip.basename or "untitled"`} extends ${2:Parent} {
+interface ${1:`!p snip.rv = get_class_name(snip)`} extends ${2:Parent} {
 
 	$0
 
@@ -94,22 +71,17 @@ interface ${1:`!p snip.rv = snip.basename or "untitled"`} extends ${2:Parent} {
 endsnippet
 
 snippet ini "Interface implements" b
-interface ${1:`!p snip.rv = snip.basename or "untitled"`} implements ${2:Parent} {
+interface ${1:`!p snip.rv = get_class_name(snip)`} implements ${2:Parent} {
 
 	$0
 
 }
 endsnippet
 
-snippet cn "Constructor, \w fields + assigments" b
-`!p
-args = get_args_php(t[1])
-snip >> 1`
+snippet cn "Constructor and assigments" b
 public function __construct($1) { `!p
-args = get_args_php(t[1])
-snip >> 1
-for i in args:
-	snip += "$this->{} = {};".format(i[1:], i)
 snip << 1
+args = get_args(t[1])
+write_construct_body(args, snip)
 snip += "}"`$0
 endsnippet

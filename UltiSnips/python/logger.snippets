@@ -1,0 +1,24 @@
+snippet glog "Logger" b
+	import logging
+	logger = logging.getLogger(${1:__name__})
+endsnippet
+
+snippet le "Log error" b
+	logger.error(${1:msg})
+endsnippet
+
+snippet lg "Log debug" b
+	logger.debug(${1:msg})
+endsnippet
+
+snippet lw "Log warning" b
+	logger.warning(${1:msg})
+endsnippet
+
+snippet lc "Log critical" b
+	logger.critical(${1:msg})
+endsnippet
+
+snippet li "Log info" b
+	logger.info(${1:msg})
+endsnippet

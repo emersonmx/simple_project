@@ -11,7 +11,67 @@ snippet doc "Doc" b
 """$0"""
 endsnippet
 
+snippet imp "Import" b
+import ${0:sys}
+endsnippet
+
+snippet from "from ... import ..." b
+from ${1:package} import ${0:module}
+endsnippet
+
 snippet if "If statement" b
 if ${1:True}:
 	${2:pass}
+endsnippet
+
+snippet ife "If else statement" b
+if ${1:True}:
+	${2:pass}
+else:
+	${3:pass}
+endsnippet
+
+snippet el "Else statement" b
+else:
+	${1:pass}
+endsnippet
+
+snippet elif "Else if statement" b
+elif ${1:True}:
+	${2:pass}
+endsnippet
+
+snippet for "For loop" b
+for ${1:i} in range(${2:10}):
+	${3:print i,}
+endsnippet
+
+snippet wh "While loop" b
+while ${1:True}:
+	${2:pass}
+endsnippet
+
+snippet dowh "Do while loop" b
+while True:
+	${2:pass}
+	if ${1:True}:
+		break
+endsnippet
+
+snippet with "With" b
+	with ${1:expr} as ${2:var}:
+		${3:pass}
+endsnippet
+
+snippet fun "Function" b
+def ${1:name}(${2:params}):
+	${3:pass}
+endsnippet
+
+snippet pr "Print" b
+print $0
+endsnippet
+
+snippet re "return" b
+return $0
 endsnippet

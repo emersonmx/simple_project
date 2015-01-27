@@ -2,6 +2,20 @@ priority -1
 clearsnippets
 priority 0
 
+snippet php "Php tag" w
+<?php
+
+${VISUAL}$0
+endsnippet
+
+snippet phps "Php open/close" w
+<?php ${VISUAL}$0 ?>
+endsnippet
+
+snippet phpe "Php echo" w
+<?php echo ${VISUAL}$0 ?>
+endsnippet
+
 snippet doc "Comments" b
 /**
  * $0
@@ -43,7 +57,7 @@ endsnippet
 snippet fore "Foreach loop" b
 foreach ($${1:variable} as $${3:value}) {
 	${4:/* code... */}
-}$0
+}
 endsnippet
 
 snippet forek "Foreach key loop" b
@@ -58,7 +72,7 @@ while (${1:/* condition */}) {
 }
 endsnippet
 
-snippet do "Do while loop" b
+snippet dowh "Do while loop" b
 do {
 	${2:/* code */}
 while (${1:/* condition */});
@@ -68,4 +82,20 @@ snippet fun "Function" b
 function ${1:name}(${2:params}) {
 	${3:/* code */}
 }
+endsnippet
+
+snippet ec "echo" b
+echo $0
+endsnippet
+
+snippet prr "Print r" b
+print_r($${1:var});
+endsnippet
+
+snippet vd "Var dump" b
+var_dump($${1:var});
+endsnippet
+
+snippet ret "return" b
+return $1
 endsnippet

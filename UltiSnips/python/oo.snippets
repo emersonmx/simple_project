@@ -3,7 +3,7 @@ from snippet_helper.common import get_class_name
 from snippet_helper.python import *
 endglobal
 
-snippet . "self"
+snippet /(^|(?<=\W))\./ "self." r
 self.
 endsnippet
 

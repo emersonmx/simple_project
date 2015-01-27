@@ -63,9 +63,11 @@ snippet with "With" b
 		${3:pass}
 endsnippet
 
-snippet fun "Function" b
-def ${1:name}(${2:params}):
-	${3:pass}
+snippet def "function" b
+def ${1:function}(`!p
+if snip.indent:
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg}):
+	${0:pass}
 endsnippet
 
 snippet pr "Print" b
@@ -74,4 +76,16 @@ endsnippet
 
 snippet re "return" b
 return $0
+endsnippet
+
+snippet ifmain "ifmain" b
+def ${1:main}():
+	${0:pass}
+
+if __name__ == "__main__":
+	$1()
+endsnippet
+
+snippet mgk "Magic" w
+__${1:init}__
 endsnippet

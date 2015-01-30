@@ -1,5 +1,6 @@
 global !p
 from snippet_helper.common import get_class_name
+from snippet_helper.php import *
 endglobal
 
 snippet ns "Namespace" b
@@ -66,28 +67,31 @@ endsnippet
 
 snippet getter "Getter" b
 public function get${2:Name}() {
-	return $this->`!p snip.rv = prepare_field(t[2])`;
+	return $this->`!p snip.rv = first_lower(t[2])`;
 }
 endsnippet
 
 snippet setter "Setter" b
-public function set${1:Name}($`!p snip.rv = prepare_field(t[1])`) {
+public function set${1:Name}($`!p snip.rv = first_lower(t[1])`) {
 	$this->`!p
-snip.rv = prepare_field(t[1])` = $`!p
-snip.rv = prepare_field(t[1])`;${2:
+snip.rv = first_lower(t[1])` = $`!p
+snip.rv = first_lower(t[1])`;${2:
 	return $this;}
 }
 endsnippet
 
 snippet gs "Getter and setter" b
 public function get$1() {
-	return $this->`!p snip.rv = prepare_field(t[1])`;
+	return $this->`!p
+field = first_lower(t[1])
+field =
+snip.rv = first_lower(t[1])`;
 }
 
-public function set${1:Name}($`!p snip.rv = prepare_field(t[1])`) {
+public function set${1:Name}($`!p snip.rv = first_lower(t[1])`) {
 	$this->`!p
-snip.rv = prepare_field(t[1])` = $`!p
-snip.rv = prepare_field(t[1])`;${2:
+snip.rv = first_lower(t[1])` = $`!p
+snip.rv = first_lower(t[1])`;${2:
 	return $this;}
 }
 endsnippet

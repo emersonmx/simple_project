@@ -3,8 +3,15 @@ import re
 def write_args(args):
     return ", ".join(map(str, args))
 
-def prepare_field(field):
-    return field[0].upper() + field[1:]
+def first_upper(field):
+    if field:
+        return field[0].upper() + field[1:]
+    return field
+
+def first_lower(field):
+    if field:
+        return field[0].lower() + field[1:]
+    return field
 
 def get_args(group):
     word = re.compile('\$\w+')
@@ -22,15 +29,15 @@ def write_construct_body(args, snip):
     snip << 1
 
 def write_getter(field, snip):
-    snip += "public function get{}() {{".format(prepare_field(field[1:]))
+    snip += "public function get{}() {{".format(first_upper(field[1:]))
     snip >> 1
     snip += "return $this->{};".format(field[1:])
     snip << 1
     snip += "}\n"
 
 def write_setter(field, snip):
-    snip += "public function set{}({}) {{".format(prepare_field(field[1:]),
-                                                  field)
+    snip += "public function set{}({}) {{".format(
+            first_upper(field[1:]), field)
     snip >> 1
     snip += "$this->{} = {};".format(field[1:], field)
     snip << 1

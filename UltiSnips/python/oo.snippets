@@ -18,7 +18,7 @@ parents = get_args(t[2])
 write_init_body(args, parents, snip)`
 endsnippet
 
-snippet interface "Interface" b
+snippet abstract "Abstract class" b
 class ${1:`!p snip.rv = get_class_name(snip)`}(object):
 
 	__metaclass__ = ABCMeta
@@ -40,7 +40,7 @@ snippet super "Super call" b
 super(${2:${1:SuperClass}, self}).${3:__init__}(${4:args})
 endsnippet
 
-snippet defa "Interface method" b
+snippet defa "Abstract method" b
 @abstractmethod
 def ${1:function}(`!p
 if snip.indent:

@@ -11,7 +11,7 @@ snippet once "Include header once only guard"
 if not snip.c:
 	import string
 	name = re.sub(r'[^A-Za-z0-9]+','_', path).upper()
-	snip.rv = ('%s_' % (name)).upper()
+	snip.rv = ('%s' % (name)).upper()
 else:
 	snip.rv = snip.c`}
 #define $1

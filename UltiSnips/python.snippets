@@ -106,8 +106,7 @@ class ${1:`!p snip.rv = get_class_name(snip)`}(${2:object}):
 snip.rv = "self" + (", " if len(t[4]) else "")`${4:arg}):`!p
 snip >> 2
 args = get_args(t[4])
-parents = get_args(t[2])
-write_init_body(args, parents, snip)`
+write_init_body(args, t[1], snip)`
 endsnippet
 
 snippet abstract "Abstract class" b

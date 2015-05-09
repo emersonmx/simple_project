@@ -21,6 +21,18 @@ ${VISUAL}${0}
 
 endsnippet
 
+snippet extc "Extern C"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+$0
+
+#ifdef __cplusplus
+}
+#endif
+endsnippet
+
 snippet main "main() (main)"
 int main() {
 	${VISUAL}${0}

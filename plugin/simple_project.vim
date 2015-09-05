@@ -68,10 +68,6 @@ endfunction
 function! SimpleProjectLoad()
     let full_path = s:FindUp()
     if !empty(full_path)
-        let sp_project_root_path =
-            \ substitute(full_path, g:sp_project_filename, "", "")
-
-        execute ":cd " . sp_project_root_path
         execute ":source" . full_path
     endif
 endfunction

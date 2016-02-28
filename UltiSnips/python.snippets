@@ -10,6 +10,8 @@ endglobal
 snippet #! "Shebang header for python scripts" b
 #!/usr/bin/env python
 # encoding: utf-8
+
+$0
 endsnippet
 
 snippet doc "Doc" b
@@ -76,7 +78,7 @@ if snip.indent:
 endsnippet
 
 snippet pr "Print" b
-print $0
+print($0)
 endsnippet
 
 snippet re "return" b

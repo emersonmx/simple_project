@@ -23,6 +23,7 @@ endif
 let g:sp_loaded = 1
 
 let g:sp_project_filename = ".vimproject"
+let g:sp_autocd = 1
 
 function! s:FindUp()
     let filename_modifier_string = "%:p:h"
@@ -51,23 +52,18 @@ endfunction
 
 function! s:NewProject()
     execute "edit " . g:sp_project_filename
-
-    let new_project = [
-        \"\" Variables.",
-        \"",
-        \"\" Functions.",
-        \"",
-        \"\" Miscellaneous.",
-        \""
-    \]
-
-    call append(0, new_project)
 	execute "normal GddggzR"
 endfunction
 
 function! SimpleProjectLoad()
     let full_path = s:FindUp()
     if !empty(full_path)
+        if g:sp_autocd
+            let sp_project_root_path =
+                \ substitute(full_path, g:sp_project_filename, "", "")
+
+            execute ":cd " . sp_project_root_path
+        endif
         execute ":source" . full_path
     endif
 endfunction

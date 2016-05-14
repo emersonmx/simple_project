@@ -15,7 +15,6 @@ if not snip.c:
 	if (strip_strings):
 		for s in strip_strings:
 			path = re.sub(r'^' + s, '', path)
-			print(path)
 
 	name = re.sub(r'[^A-Za-z0-9]+','_', path).upper()
 	snip.rv = ('%s_' % (name)).upper()

@@ -1,4 +1,3 @@
-vimx
-====
+# vimx
 
 Meus plugins personalizados :)

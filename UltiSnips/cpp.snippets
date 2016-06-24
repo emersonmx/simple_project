@@ -28,15 +28,6 @@ class ${1:`!p snip.rv = snip.basename or "name"`} {
 };
 endsnippet
 
-# Overwrite C snippets
-priority 1
-
-snippet fori "for int loop (fori)"
-for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
-	${VISUAL}${0}
-}
-endsnippet
-
 snippet sca "Static cast" i
 static_cast<${1:unsigned}>(${0:${VISUAL:expr}})
 endsnippet
@@ -47,16 +38,37 @@ enum class ${1:MyEnum} {
 };
 endsnippet
 
-snippet const "const" b
+snippet cexp "constexpr" i
+constexpr $0
+endsnippet
+
+snippet const "const" i
 const ${1:int} ${2:myConst}{${3:0}};
 endsnippet
 
-snippet ptr "unique_ptr" b
-std::unique_ptr<${1:int}> ${2:myPointer};
+snippet m "member" b
+${1:int} ${2:member}_${3:{${4}}};
 endsnippet
 
-snippet m "member" b
-${1:int} ${2:member}_${3};
+snippet ptr "std::unique_ptr" i
+std::unique_ptr<${1:int}>
+endsnippet
+
+snippet array "std::array" i
+std::array<${1:int}, ${2:10}>
+endsnippet
+
+snippet mku "std::make_unique" i
+std::make_unique<${1:int}>(${2});
+endsnippet
+
+# Overwrite C snippets
+priority 1
+
+snippet fori "for int loop (fori)"
+for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}${0}
+}
 endsnippet
 
 priority 0

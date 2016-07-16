@@ -1,3 +1,3 @@
-# vimx
+# vmx
 
-Meus plugins personalizados :)
+Meus plugins e lixos do vim :)

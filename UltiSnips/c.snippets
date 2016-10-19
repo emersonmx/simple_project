@@ -10,7 +10,7 @@ snippet once "Include header once only guard"
 #ifndef ${1:`!p
 if not snip.c:
 	import string
-	strip_strings = snip.opt('g:vmx_snippet_once_strip_string_beginning_with', '')
+	strip_strings = snip.opt('g:vmx_c_snippet_once_source_path', '')
 	strip_strings = strip_strings.split(',')
 	if (strip_strings):
 		for s in strip_strings:

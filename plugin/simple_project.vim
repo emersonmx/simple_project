@@ -87,3 +87,8 @@ augroup END
 
 command! SimpleProjectLoad call SimpleProjectLoad()
 command! SimpleProject call SimpleProject()
+
+augroup AutoSimpleProject
+    autocmd!
+    autocmd BufWritePost .vimproject SimpleProjectLoad
+augroup END

@@ -13,5 +13,5 @@ def get_define_guard(snip, path):
     if not snip.c:
         name = re.sub(r'[^A-Za-z0-9]+', '_', path).upper()
         return ('%s_' % (name)).upper()
-    else:
-        return snip.c
+
+    return snip.c

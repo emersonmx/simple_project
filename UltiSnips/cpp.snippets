@@ -1,5 +1,8 @@
 global !p
-default_namespace = snip.opt('g:vmx_cpp_snippet_ns_default', snip.basename) or "package"
+from snippet_helper.c import *
+from snippet_helper.cpp import *
+default_namespace = snip.opt('g:snips_cpp_ns_default', snip.basename) or "package"
+clean_path = strip_path(snip, path)
 endglobal
 
 snippet uns "use namespace" b
@@ -12,10 +15,29 @@ ${VISUAL}${0}
 }${1/.+/ \/* /m}namespace $1${1/.+/ *\//m}
 endsnippet
 
-snippet class "class .. (class)" b
+snippet "ns ()" "Description" rb
+
+endsnippet
+
+snippet cl "class .. (class)" b
 class ${1:`!p snip.rv = snip.basename or "name"`} {
-	${2}
+	${0}
 };
+endsnippet
+
+snippet pub "Public" b
+public:
+	${VISUAL}${0}
+endsnippet
+
+snippet pro "Protected" b
+protected:
+	${VISUAL}${0}
+endsnippet
+
+snippet pri "Private" b
+private:
+	${VISUAL}${0}
 endsnippet
 
 snippet vfund "virtual method declaration" b
@@ -98,3 +120,22 @@ for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
 }
 endsnippet
 priority 0
+
+# Templates
+snippet templ_class "Template for empty class" b
+#ifndef ${1:`!p snip.rv = get_define_guard(snip, clean_path)`}
+#define $1
+
+`!p
+for name in get_namespaces(clean_path):
+	snip.rv += "namespace {} {{\n".format(name)
+`
+class ${2:`!p snip.rv = snip.basename or "name"`} {
+	${0}
+};
+`!p
+for name in get_namespaces(clean_path):
+	snip += "}} /* namespace {} */".format(name)
+`
+#endif /* $1 */
+endsnippet

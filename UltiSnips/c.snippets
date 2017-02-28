@@ -1,3 +1,8 @@
+global !p
+from snippet_helper.c import *
+clean_path = strip_path(snip, path)
+endglobal
+
 snippet Inc "#include local header (inc)" b
 #include "${1:`!p snip.rv = snip.basename + '.h'`}"
 endsnippet
@@ -7,19 +12,7 @@ snippet inc "#include <> (Inc)" b
 endsnippet
 
 snippet once "Include header once only guard" b
-#ifndef ${1:`!p
-if not snip.c:
-	import string
-	strip_strings = snip.opt('g:vmx_c_snippet_once_source_path', '')
-	strip_strings = strip_strings.split(',')
-	if (strip_strings):
-		for s in strip_strings:
-			path = re.sub(r'^' + s, '', path)
-
-	name = re.sub(r'[^A-Za-z0-9]+','_', path).upper()
-	snip.rv = ('%s_' % (name)).upper()
-else:
-	snip.rv = snip.c`}
+#ifndef ${1:`!p snip.rv = get_define_guard(snip, clean_path)`}
 #define $1
 
 ${VISUAL}${0}

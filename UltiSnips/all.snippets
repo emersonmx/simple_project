@@ -1,10 +1,10 @@
 # Licenses {{{ #
 snippet c) "Copyright" b
-Copyright (C) `!v strftime("%Y")` ${1:`g:snips_author`}
+Copyright (C) `!v strftime("%Y")` ${1:`!v g:snips_author`}
 endsnippet
 
 snippet GPL3 "GPL3 License" b
-Copyright (C) ${3:`!v strftime("%Y")`} ${2:`g:snips_author`}
+Copyright (C) ${3:`!v strftime("%Y")`} ${2:`!v g:snips_author`}
 
 This file is part of ${1:project}.
 
@@ -23,7 +23,7 @@ along with $1.  If not, see <http://www.gnu.org/licenses/>.
 endsnippet
 
 snippet MIT "MIT License" b
-Copyright (C) ${2:`!v strftime("%Y")`} ${1:`g:snips_author`}
+Copyright (C) ${2:`!v strftime("%Y")`} ${1:`!v g:snips_author`}
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the "Software"),
@@ -45,7 +45,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 endsnippet
 
 snippet MITRef "Reference to MIT Licence" b
-Copyright (C) ${2:`!v strftime("%Y")`} ${1:`g:snips_author`}
+Copyright (C) ${2:`!v strftime("%Y")`} ${1:`!v g:snips_author`}
 
 See the file ${3:LICENSE} for copying permission.
 endsnippet

@@ -1,36 +1,50 @@
-priority -1
-clearsnippets
-priority 0
-
-extends c
-
 global !p
-default_namespace = snip.opt('g:vmx_cpp_snippet_ns_default', snip.basename) or "name"
+default_namespace = snip.opt('g:vmx_cpp_snippet_ns_default', snip.basename) or "package"
 endglobal
 
-snippet uns "use namespace"
-using namespace ${1:`!p snip.rv = default_namespace or "name"`};
+snippet uns "use namespace" b
+using namespace ${1:`!p snip.rv = default_namespace`};
 endsnippet
 
-snippet ns "namespace .. (namespace)"
+snippet ns "namespace .. (namespace)" b
 namespace${1/.+/ /m}${1:`!p snip.rv = default_namespace`} {
 ${VISUAL}${0}
 }${1/.+/ \/* /m}namespace $1${1/.+/ *\//m}
 endsnippet
 
-snippet class "class .. (class)"
+snippet class "class .. (class)" b
 class ${1:`!p snip.rv = snip.basename or "name"`} {
 	${2}
 };
 endsnippet
 
-snippet enumc "enum class" b
-enum class ${1:MyEnum} {
-	$0
-};
+snippet vfund "virtual method declaration" b
+virtual ${1:void} ${2:function_name}(${3});
 endsnippet
 
-snippet cexp "constexpr" i
+snippet afund "abstract method declaration" b
+virtual ${1:void} ${2:function_name}(${3}) = 0;
+endsnippet
+
+snippet vfun "virtual method" b
+virtual ${1:void} ${2:function_name}(${3}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet cfundf "method definition" b
+${1:void} ${2:`!p snip.rv = snip.basename or "Class"`::}${3:function_name}(${4}) {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet ofun "override method" b
+${1:void} ${2:function_name}(${3}) override {
+	${VISUAL}${0}
+}
+endsnippet
+
+snippet cexp "constexpr" b
 constexpr $0
 endsnippet
 
@@ -42,14 +56,8 @@ snippet m "member" b
 ${1:int} ${2:member}_${4:{${3}}};
 endsnippet
 
-snippet fore "for each loop"
+snippet fore "for each loop" b
 for (${1:auto&} ${2:value}: ${3:values}) {
-	${VISUAL}${0}
-}
-endsnippet
-
-snippet fori "for int loop"
-for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
 	${VISUAL}${0}
 }
 endsnippet
@@ -58,14 +66,35 @@ snippet sca "Static cast" i
 static_cast<${1:unsigned}>(${0:${VISUAL:expr}})
 endsnippet
 
-snippet ptr "std::unique_ptr" i
+snippet ptr "std::unique_ptr" b
 std::unique_ptr<${1:int}>
 endsnippet
 
-snippet array "std::array" i
+snippet array "std::array" b
 std::array<${1:int}, ${2:10}>
 endsnippet
 
 snippet mku "std::make_unique" i
 std::make_unique<${1:int}>(${2});
 endsnippet
+
+# Overwrite C snippets
+priority 1
+snippet st "struct" b
+struct ${1:`!p snip.rv = (snip.basename or "name")`} {
+	${2:/* data */}
+};
+endsnippet
+
+snippet enum "enum class" b
+enum class ${1:MyEnum} {
+	${0}
+};
+endsnippet
+
+snippet fori "for int loop" b
+for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}${0}
+}
+endsnippet
+priority 0

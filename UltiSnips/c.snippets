@@ -1,16 +1,12 @@
-priority -1
-clearsnippets
-priority 0
-
-snippet Inc "#include local header (inc)"
+snippet Inc "#include local header (inc)" b
 #include "${1:`!p snip.rv = snip.basename + '.h'`}"
 endsnippet
 
-snippet inc "#include <> (Inc)"
+snippet inc "#include <> (Inc)" b
 #include <${1:.h}>
 endsnippet
 
-snippet once "Include header once only guard"
+snippet once "Include header once only guard" b
 #ifndef ${1:`!p
 if not snip.c:
 	import string
@@ -30,56 +26,56 @@ ${VISUAL}${0}
 #endif /* $1 */
 endsnippet
 
-snippet extc "Extern C"
+snippet extc "Extern C" b
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-$0
+${VISUAL}${0}
 
 #ifdef __cplusplus
 }
 #endif
 endsnippet
 
-snippet re "return"
-return $0
+snippet re "return" i
+return ${0}
 endsnippet
 
-snippet main "main() (main)"
+snippet main "main() (main)" b
 int main() {
 	${VISUAL}${0}
 	return 0;
 }
 endsnippet
 
-snippet mainn "main(int argc, char* argv[]) (main)"
+snippet mainn "main(int argc, char* argv[]) (main)" b
 int main(int argc, char* argv[]) {
 	${VISUAL}${0}
 	return 0;
 }
 endsnippet
 
-snippet for "for loop (for)"
+snippet for "for loop (for)" b
 for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
 	${VISUAL}${4}
 }
 endsnippet
 
-snippet fori "for int loop (fori)"
+snippet fori "for int loop (fori)" b
 ${4:int} $2;
 for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
 	${VISUAL}${4}
 }
 endsnippet
 
-snippet if "if .. (if)"
+snippet if "if .. (if)" b
 if (${1:/* condition */}) {
 	${VISUAL}${2}
 }
 endsnippet
 
-snippet ife "if .. else (ife)"
+snippet ife "if .. else (ife)" b
 if (${1:/* condition */}) {
 	${2}
 } else {
@@ -87,14 +83,14 @@ if (${1:/* condition */}) {
 }
 endsnippet
 
-snippet st "struct"
+snippet st "struct" b
 struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
-	${2:/* data */}
+	${VISUAL}${0:/* data */}
 };
 endsnippet
 
 snippet fun "function" b
 ${1:void} ${2:function_name}(${3}) {
-	${VISUAL}${4}
+	${VISUAL}${0}
 }
 endsnippet

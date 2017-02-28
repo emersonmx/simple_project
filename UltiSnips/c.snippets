@@ -1,6 +1,6 @@
 global !p
 from snippet_helper.c import *
-clean_path = strip_path(snip, path)
+clean_path = strip_path(path, snip.opt(VIM_KEY_ONCE, []))
 endglobal
 
 snippet Inc "#include local header (inc)" b

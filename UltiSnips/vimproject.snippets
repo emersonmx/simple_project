@@ -1,6 +1,6 @@
 extends vim
 
-snippet cpp "C++ project template" b 
+snippet cpp "C++ project template" b
 let g:snips_author="${1}"
 let g:snips_c_strip_paths=["include/", "src/"]
 let g:snips_cpp_ns_default="${2}"
@@ -42,7 +42,7 @@ noremap <F5> :Build<cr>
 noremap <F6> :Test<cr>
 endsnippet
 
-snippet default_plugins "Load default plugins" b 
+snippet default_plugins "Load default plugins" b
 call plug#load('ultisnips', 'vim-snippets', 'YouCompleteMe')
 call plug#load('ctrlp.vim')
 call plug#load('nerdcommenter')

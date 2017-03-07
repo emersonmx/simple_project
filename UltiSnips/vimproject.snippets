@@ -5,7 +5,7 @@ let g:snips_author="${1}"
 let g:snips_c_strip_paths=["include/", "src/"]
 let g:snips_cpp_ns_default="${2}"
 
-set path+=include/**
+set path+=include/**,src/**
 set tags=.git/tags,.git/tags.libs
 
 call plug#load('ultisnips', 'vim-snippets', 'YouCompleteMe')

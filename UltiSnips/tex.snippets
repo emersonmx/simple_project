@@ -1,6 +1,6 @@
 snippet "b(egin)?" "begin{} / end{}" br
 \begin{${1:something}}
-${VISUAL}${2}
+${2:${VISUAL}}
 \end{$1}
 endsnippet
 
@@ -18,5 +18,5 @@ ${1:text}~\\${2:ref}\{${3:id}\}
 endsnippet
 
 snippet it "Item" b
-\item ${VISUAL}${1}
+\item ${1:${VISUAL}}
 endsnippet

@@ -17,12 +17,12 @@ def mixedCase(word):
 endglobal
 
 snippet // "Comment" b
-// ${VISUAL}$0
+// ${0:${VISUAL}}
 endsnippet
 
 snippet /* "Comment (multi line)" b
 /*
-  ${VISUAL}$0
+  ${0:${VISUAL}}
 */
 endsnippet
 
@@ -227,19 +227,19 @@ endsnippet
 
 snippet if "if" b
 if (${1:condition}) {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet elif "else if"
 else if ($1) {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet el "else" w
 else {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
@@ -267,25 +267,25 @@ endsnippet
 
 snippet for "for loop (for)"
 for (int ${2:i} = 0; $2 < ${1:count}; ${3:$2++}) {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet fore "for (each)" b
 for (${1:Object} ${2:o} : ${3:objs}) {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet wh "while" b
 while ($1) {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet try "try/catch" b
 try {
-	${VISUAL}$1
+	${1:${VISUAL}}
 } catch(${2:Exception} ${3:e}){
 	${4:e.printStackTrace();}
 }
@@ -334,11 +334,11 @@ throw new $1;
 endsnippet
 
 snippet p "print" b
-System.out.print(${VISUAL}$1);
+System.out.print(${1:${VISUAL}});
 endsnippet
 
 snippet pl "println"  b
-System.out.println(${VISUAL}$1);
+System.out.println(${1:${VISUAL}});
 endsnippet
 
 snippet as "assert" b

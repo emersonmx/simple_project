@@ -10,15 +10,15 @@ endglobal
 snippet php "Php tag" w
 <?php
 
-${VISUAL}$0
+${0:${VISUAL}}
 endsnippet
 
 snippet phps "Php open/close" w
-<?php ${VISUAL}$0 ?>
+<?php ${0:${VISUAL}} ?>
 endsnippet
 
 snippet phpe "Php echo" w
-<?=${VISUAL}$0?>
+<?=${0:${VISUAL}}?>
 endsnippet
 
 snippet doc "Comments" b

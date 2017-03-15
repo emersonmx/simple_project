@@ -15,7 +15,7 @@ snippet once "Include header once only guard" b
 #ifndef ${1:`!p snip.rv = get_define_guard(snip, clean_path)`}
 #define $1
 
-${VISUAL}${0}
+${0:${VISUAL}}
 #endif /* $1 */
 endsnippet
 
@@ -24,7 +24,7 @@ snippet extc "Extern C" b
 extern "C" {
 #endif
 
-${VISUAL}${0}
+${0:${VISUAL}}
 
 #ifdef __cplusplus
 }
@@ -37,34 +37,34 @@ endsnippet
 
 snippet main "main() (main)" b
 int main() {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 	return 0;
 }
 endsnippet
 
 snippet mainn "main(int argc, char* argv[]) (main)" b
 int main(int argc, char* argv[]) {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 	return 0;
 }
 endsnippet
 
 snippet for "for loop (for)" b
 for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
-	${VISUAL}${4}
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet fori "for int loop (fori)" b
 ${4:int} $2;
 for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
-	${VISUAL}${4}
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet if "if .. (if)" b
 if (${1:/* condition */}) {
-	${VISUAL}${2}
+	${0:${VISUAL}}
 }
 endsnippet
 
@@ -78,12 +78,12 @@ endsnippet
 
 snippet st "struct" b
 struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
-	${VISUAL}${0:/* data */}
+	${0:${VISUAL:/* data */}}
 };
 endsnippet
 
 snippet fun "function" b
 ${1:void} ${2:function_name}(${3}) {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 }
 endsnippet

@@ -13,7 +13,7 @@ snippet ns "namespace" b
 `!p
 write_namespaces_begin(snip, [default_namespace])
 `
-${VISUAL}${0}
+${0:${VISUAL}}
 `!p write_namespaces_end(snip, [default_namespace])`
 endsnippet
 
@@ -22,7 +22,7 @@ snippet nns "namespace" b
 namespaces = split_namespaces_by_pathsep(clean_path)
 write_namespaces_begin(snip, namespaces)
 `
-${VISUAL}${0}
+${0:${VISUAL}}
 `!p write_namespaces_end(snip, namespaces)`
 endsnippet
 
@@ -31,7 +31,7 @@ snippet "ns ([a-zA-Z_:][a-zA-Z0-9_:]+)" "namespace by expression ([::]ns1::ns2::
 namespaces = split_namespaces_by_colon(match.group(1))
 write_namespaces_begin(snip, namespaces)
 `
-${VISUAL}${0}
+${0:${VISUAL}}
 `!p write_namespaces_end(snip, namespaces)`
 endsnippet
 
@@ -43,17 +43,17 @@ endsnippet
 
 snippet pub "Public" b
 public:
-	${VISUAL}${0}
+	${0:${VISUAL}}
 endsnippet
 
 snippet pro "Protected" b
 protected:
-	${VISUAL}${0}
+	${0:${VISUAL}}
 endsnippet
 
 snippet pri "Private" b
 private:
-	${VISUAL}${0}
+	${0:${VISUAL}}
 endsnippet
 
 snippet vfund "virtual method declaration" b
@@ -66,19 +66,19 @@ endsnippet
 
 snippet vfun "virtual method" b
 virtual ${1:void} ${2:function_name}(${3}) {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet cfundf "method definition" b
 ${1:void} ${2:`!p snip.rv = snip.basename or "Class"`::}${3:function_name}(${4}) {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet ofun "override method" b
 ${1:void} ${2:function_name}(${3}) override {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 }
 endsnippet
 
@@ -96,7 +96,7 @@ endsnippet
 
 snippet fore "for each loop" b
 for (${1:auto&} ${2:value}: ${3:values}) {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 }
 endsnippet
 
@@ -132,7 +132,7 @@ endsnippet
 
 snippet fori "for int loop" b
 for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
-	${VISUAL}${0}
+	${0:${VISUAL}}
 }
 endsnippet
 priority 0

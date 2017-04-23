@@ -8,14 +8,6 @@ let g:snips_cpp_ns_default="${2}"
 set path+=include/**,src/**
 set tags=.git/tags,.git/tags.libs
 
-call plug#load('ultisnips', 'vim-snippets', 'YouCompleteMe')
-call plug#load('ctrlp.vim')
-call plug#load('nerdcommenter')
-call plug#load('vim-easymotion')
-call plug#load('vim-gitgutter')
-call plug#load('vim-dispatch')
-call plug#load('vim-projectionist')
-
 function! CMake()
     Start -wait=always -dir=build/ cmake -DCMAKE_CC_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ ..<cr>
 endfunction
@@ -40,14 +32,4 @@ command! Test call Test()
 
 noremap <F5> :Build<cr>
 noremap <F6> :Test<cr>
-endsnippet
-
-snippet default_plugins "Load default plugins" b
-call plug#load('ultisnips', 'vim-snippets', 'YouCompleteMe')
-call plug#load('ctrlp.vim')
-call plug#load('nerdcommenter')
-call plug#load('vim-easymotion')
-call plug#load('vim-gitgutter')
-call plug#load('vim-dispatch')
-call plug#load('vim-projectionist')
 endsnippet

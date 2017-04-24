@@ -17,79 +17,31 @@
 " along with simple_project.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-if exists("g:sp_loaded") && g:sp_loaded
+if exists("g:loaded_simple_project")
     finish
 endif
-let g:sp_loaded = 1
+let g:loaded_simple_project = 1
+echo "loaded :)"
 
-let g:sp_project_filename = ".vimproject"
-let g:sp_autocd = 1
-
-function! s:FindUp()
-    let filename_modifier_string = "%:p:h"
-    let current_dir = expand(filename_modifier_string)
-    let last_dir = ""
-    let file_exists = 0
-
-    let running = 1
-    while running
-        let full_path = current_dir . "/" . g:sp_project_filename
-        let last_dir = current_dir
-        let filename_modifier_string = filename_modifier_string . ":h"
-        let current_dir = expand(filename_modifier_string)
-
-        if last_dir == current_dir
-            let running = 0
-        else
-            if filereadable(full_path)
-                return full_path
-            endif
-        endif
-    endwhile
-
-    return ""
-endfunction
-
-function! s:NewProject()
-    execute "edit " . g:sp_project_filename
-	execute "normal GddggzR"
-endfunction
-
-function! SimpleProjectLoad()
-    let full_path = s:FindUp()
-    if !empty(full_path)
-        if g:sp_autocd
-            let sp_project_root_path =
-                \ substitute(full_path, g:sp_project_filename, "", "")
-
-            execute ":cd " . sp_project_root_path
-        endif
-        execute ":source" . full_path
-    endif
-endfunction
-
-function! SimpleProject()
-    let full_path = s:FindUp()
-
-    if !empty(full_path)
-        execute "edit " . full_path
-    else
-        call s:NewProject()
-    endif
-endfunction
+if !exists('g:sp_project_filename')
+    let g:sp_project_filename = '.vimproject'
+endif
+if !exists('g:sp_autocd')
+    let g:sp_autocd = 1
+endif
 
 augroup simple_project
     autocmd!
     autocmd BufNewFile,BufRead .vimproject setf vim
 
-    autocmd VimEnter * nested call SimpleProjectLoad()
+    autocmd VimEnter * nested call vmx#simple_project#SimpleProjectLoad()
 augroup END
 
-command! SimpleProjectLoad call SimpleProjectLoad()
-command! SimpleProject call SimpleProject()
+command! SimpleProjectLoad call vmx#simple_project#SimpleProjectLoad()
+command! SimpleProject call vmx#simple_project#SimpleProject()
 
 augroup AutoSimpleProject
     autocmd!
     execute "autocmd BufWritePost " . g:sp_project_filename . " SimpleProjectLoad"
-    execute "autocmd BufNewFile,BufRead " . g:sp_project_filename . " set filetype=vimproject.vim"
+    execute "autocmd BufNewFile,BufRead " . g:sp_project_filename . " set filetype=vim"
 augroup END

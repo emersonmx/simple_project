@@ -21,7 +21,6 @@ if exists("g:loaded_simple_project")
     finish
 endif
 let g:loaded_simple_project = 1
-echo "loaded :)"
 
 if !exists('g:sp_project_filename')
     let g:sp_project_filename = '.vimproject'

@@ -42,5 +42,5 @@ command! SimpleProject call vmx#simple_project#SimpleProject()
 augroup AutoSimpleProject
     autocmd!
     execute "autocmd BufWritePost " . g:sp_project_filename . " SimpleProjectLoad"
-    execute "autocmd BufNewFile,BufRead " . g:sp_project_filename . " set filetype=vim"
+    execute "autocmd BufNewFile,BufRead " . g:sp_project_filename . " set filetype=vimproject.vim"
 augroup END

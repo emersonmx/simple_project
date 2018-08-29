@@ -64,7 +64,7 @@ function! vmx#simple_project#SimpleProjectLoad()
 
             execute ":cd " . sp_project_root_path
         endif
-        execute ":source" . full_path
+        execute ":source " . full_path
     endif
 endfunction
 

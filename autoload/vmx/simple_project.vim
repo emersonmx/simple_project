@@ -52,7 +52,7 @@ endfunction
 
 function! s:NewProject()
     execute "edit " . g:sp_project_filename
-	execute "normal GddggzR"
+    execute "normal GddggzR"
 endfunction
 
 function! vmx#simple_project#SimpleProjectLoad()

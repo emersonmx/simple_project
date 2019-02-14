@@ -1,26 +1,26 @@
 "
 " Copyright (C) 2013 Emerson Max de Medeiros Silva
 "
-" This file is part of simple_project.
+" This file is part of vimproject.
 "
-" simple_project is free software: you can redistribute it and/or modify
+" vimproject is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
 " the Free Software Foundation, either version 3 of the License, or
 " (at your option) any later version.
 "
-" simple_project is distributed in the hope that it will be useful,
+" vimproject is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
 "
 " You should have received a copy of the GNU General Public License
-" along with simple_project.  If not, see <http://www.gnu.org/licenses/>.
+" along with vimproject.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-if exists("g:loaded_simple_project")
+if exists("g:loaded_vimproject")
     finish
 endif
-let g:loaded_simple_project = 1
+let g:loaded_vimproject = 1
 
 if !exists('g:sp_project_filename')
     let g:sp_project_filename = '.vimproject'
@@ -29,18 +29,18 @@ if !exists('g:sp_autocd')
     let g:sp_autocd = 1
 endif
 
-augroup simple_project
+augroup vimproject
     autocmd!
     autocmd BufNewFile,BufRead .vimproject setf vim
 
-    autocmd VimEnter * nested call vmx#simple_project#SimpleProjectLoad()
+    autocmd VimEnter * nested call vmx#vimproject#VimprojectLoad()
 augroup END
 
-command! SimpleProjectLoad call vmx#simple_project#SimpleProjectLoad()
-command! SimpleProject call vmx#simple_project#SimpleProject()
+command! VimprojectLoad call vmx#vimproject#VimprojectLoad()
+command! Vimproject call vmx#vimproject#Vimproject()
 
-augroup AutoSimpleProject
+augroup AutoVimproject
     autocmd!
-    execute "autocmd BufWritePost " . g:sp_project_filename . " SimpleProjectLoad"
+    execute "autocmd BufWritePost " . g:sp_project_filename . " VimprojectLoad"
     execute "autocmd BufNewFile,BufRead " . g:sp_project_filename . " set filetype=vimproject.vim"
 augroup END

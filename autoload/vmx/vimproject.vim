@@ -1,26 +1,26 @@
 "
 " Copyright (C) 2013 Emerson Max de Medeiros Silva
 "
-" This file is part of simple_project.
+" This file is part of vimproject.
 "
-" simple_project is free software: you can redistribute it and/or modify
+" vimproject is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
 " the Free Software Foundation, either version 3 of the License, or
 " (at your option) any later version.
 "
-" simple_project is distributed in the hope that it will be useful,
+" vimproject is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
 "
 " You should have received a copy of the GNU General Public License
-" along with simple_project.  If not, see <http://www.gnu.org/licenses/>.
+" along with vimproject.  If not, see <http://www.gnu.org/licenses/>.
 "
 
-if exists("g:autoloaded_simple_project")
+if exists("g:autoloaded_vimproject")
     finish
 endif
-let g:autoloaded_simple_project = 1
+let g:autoloaded_vimproject = 1
 
 let g:sp_project_filename = get(g:, 'sp_project_filename', '.vimproject')
 let g:sp_autocd = get(g:, 'sp_autocd')
@@ -55,7 +55,7 @@ function! s:NewProject()
     execute "normal GddggzR"
 endfunction
 
-function! vmx#simple_project#SimpleProjectLoad()
+function! vmx#vimproject#VimprojectLoad()
     let full_path = s:FindUp()
     if !empty(full_path)
         if g:sp_autocd
@@ -68,7 +68,7 @@ function! vmx#simple_project#SimpleProjectLoad()
     endif
 endfunction
 
-function! vmx#simple_project#SimpleProject()
+function! vmx#vimproject#Vimproject()
     let full_path = s:FindUp()
 
     if !empty(full_path)
